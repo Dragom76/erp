@@ -8,15 +8,17 @@ const port = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// 전자 지갑(Wallet) 디렉토리 경로 지정 (매우 중요)
-// Node.js가 실행되는 위치 기준의 wallet 폴더를 지정합니다.
-oracledb.initOracleClient({ configDir: path.join(__dirname, 'wallet') });
+// 💡 [수정 완료] 인스턴트 클라이언트 라이브러리 경로(libDir)와 전자 지갑 경로(configDir) 동시 지정
+oracledb.initOracleClient({ 
+  libDir: '/opt/oracle/instantclient_21_21',
+  configDir: path.join(__dirname, 'wallet') 
+});
 
 // DB 접속 정보 설정
 const dbConfig = {
   user: 'ADMIN',
-  password: 'YOUR_DB_PASSWORD_HERE', // 💡 본인의 ADMIN 비밀번호로 변경하세요!
-  connectString: 'tboard_low'        // tnsnames.ora 파일에 정의된 접속 이름
+  password: 'js@25509562', // 💡여기에 본인의 실제 비밀번호를 입력하세요!
+  connectString: 'tboard_low'               // tnsnames.ora 파일에 정의된 접속 이름
 };
 
 // 메인 화면 (index.html 제공)
